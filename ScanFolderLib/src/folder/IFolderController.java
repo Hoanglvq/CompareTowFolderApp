@@ -1,6 +1,7 @@
 package folder;
 
 import java.io.File;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,7 +15,7 @@ import java.io.File;
  */
 public interface IFolderController {
     public boolean openFolder();
-    public File[] getListFile();
+    public List<File> getListFile();
     public boolean isTheSameAsFolder(String pathFolder);
     public String getFolderPath();
 }

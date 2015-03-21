@@ -9,6 +9,15 @@ package model;
  *
  * @author hoanglvq
  */
-public class FirstCriterion implements CriterionInterface{
+public class FirstCriterion extends ICriterion{
+    
+    private int percent;
+    
+    
+    
+    @Override
+    public boolean checkCriterion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

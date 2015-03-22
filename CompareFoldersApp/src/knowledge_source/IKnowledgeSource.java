@@ -12,7 +12,7 @@ import black_board.BlackBoard;
  *
  * @author hoanglvq
  */
-public abstract class KnowledgeSource {
+public abstract class IKnowledgeSource {
     
     BlackBoard bb;
     String nameKS;

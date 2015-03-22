@@ -5,7 +5,7 @@
  */
 package event;
 
-import knowledge_source.KnowledgeSource;
+import knowledge_source.IKnowledgeSource;
 
 /**
  *
@@ -13,8 +13,8 @@ import knowledge_source.KnowledgeSource;
  */
 public interface EventService {
     
-    public void addComponentListener(KnowledgeSource cmpListener);
-    public void removeComponentListerner(KnowledgeSource cmpListener);
-    public void eventTrigger(KnowledgeSource cmpListener);
+    public void addComponentListener(IKnowledgeSource cmpListener);
+    public void removeComponentListerner(IKnowledgeSource cmpListener);
+    public void eventTrigger(IKnowledgeSource cmpListener);
     
 }

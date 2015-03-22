@@ -9,6 +9,14 @@ package model;
  *
  * @author hoanglvq
  */
-interface CriterionInterface {
+public abstract class ICriterion {
+    
+    String nameCriterion;
+  
+    public String getNameCriterion(){
+        return this.nameCriterion;
+    }
+    
+    public abstract boolean checkCriterion();
     
 }

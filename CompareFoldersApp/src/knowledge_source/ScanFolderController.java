@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import folder.*;
 import java.io.File;
+import java.util.Date;
+import model.FileType;
 
 /**
  *
  * @author hoanglvq
  */
-public class ScanFolderController extends KnowledgeSource implements event.EventService{
+public class ScanFolderController extends IKnowledgeSource implements event.EventService {
 
     String path;
     List lstCmpListener;
@@ -25,32 +27,49 @@ public class ScanFolderController extends KnowledgeSource implements event.Event
         this.nameKS = "FolderController";
         fComponent = Initiator.init();
     }
-    
-    public boolean openFolder(){
-        return fComponent.openFolder();
+
+    public boolean openFolder(int num) {
+        boolean rst = fComponent.openFolder();
+        if (num == 1) {
+            this.bb.setPathFolder1(this.getFolderPath());
+            this.bb.setListFilesInFolder1(this.convertToListFileType(this.getListFile()));
+        }else{
+            this.bb.setPathFolder2(this.getFolderPath());
+            this.bb.setListFilesInFolder2(this.convertToListFileType(this.getListFile()));
+        }
+        return rst;
     }
     
-    public File[] getListFile(){
+    private List<FileType> convertToListFileType(List<File> lstF){
+        List<FileType> lstFileType = new ArrayList<>();
+        lstF.stream().map((f) -> new FileType(f.getName(),new Date(f.lastModified()),f.getAbsolutePath(),"")).forEach((ft) -> {
+            lstFileType.add(ft);
+        });
+        return lstFileType;
+    }
+    
+   
+    public List<File> getListFile() {
         return fComponent.getListFile();
     }
-    
-    public String getFolderPath(){
+
+    public String getFolderPath() {
         return fComponent.getFolderPath();
     }
 
     @Override
-    public void addComponentListener(knowledge_source.KnowledgeSource cmpListener) {
+    public void addComponentListener(knowledge_source.IKnowledgeSource cmpListener) {
         lstCmpListener.add(cmpListener);
     }
 
     @Override
-    public void removeComponentListerner(knowledge_source.KnowledgeSource cmpListener) {
+    public void removeComponentListerner(knowledge_source.IKnowledgeSource cmpListener) {
         lstCmpListener.remove(cmpListener);
     }
 
     @Override
-    public void eventTrigger(knowledge_source.KnowledgeSource cmpListener) {
-        
+    public void eventTrigger(knowledge_source.IKnowledgeSource cmpListener) {
+
     }
 
 }

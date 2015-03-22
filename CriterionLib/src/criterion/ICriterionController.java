@@ -11,10 +11,6 @@ package criterion;
  */
 public interface ICriterionController {
     
-    // check criterion 
-    public void checkCriterion();
-    // add new criterion
-    public void addNewCriterion();
-    // ... 
+    public  
     
 }

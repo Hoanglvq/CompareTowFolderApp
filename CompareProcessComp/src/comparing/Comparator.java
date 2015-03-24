@@ -24,7 +24,7 @@ import service.FileProp;
  *
  * @author Kaka Hoang Huy
  */
-public class Comparator implements IComparator {
+class Comparator implements IComparator {
     
     public static final String onlyA = "1";
     public static final String onlyB = "2";

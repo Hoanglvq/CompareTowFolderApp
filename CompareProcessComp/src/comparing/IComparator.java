@@ -14,7 +14,7 @@ import service.FileProp;
  *
  * @author Kaka Hoang Huy
  */
-interface IComparator {
+public interface IComparator {
     HashMap<String, List<File[]>> startCompare(String dirMasterA, String dirMasterB, List<File> fileList1, List<File> fileList2);
     void stopCompare();
 }

@@ -5,7 +5,6 @@
  */
 package comparing;
 
-import codec.IComparator;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -40,16 +39,9 @@ public class Comparator implements IComparator {
         Comparator compare = new Comparator();
         List<File> ar1 = Arrays.asList(dir1.listFiles());
         List<File> ar2 = Arrays.asList(dir2.listFiles());
-        HashMap<String, List<File[]>> result = compare.compareListFiles("E:\\Compare\\s2", "E:\\Compare\\s1", ar1, ar2);
+        HashMap<String, List<File[]>> result = compare.startCompare("E:\\Compare\\s2", "E:\\Compare\\s1", ar1, ar2);
         System.out.println("rs: " + result.get("1").size() + "------------------------------------------------");
         for (int i = 0; i < result.get("1").size(); i++) {
-//            FileProp[] item = result[i];
-//            if (item[0] != null) {
-//                System.out.println("Name: " + item[0].getPath() + " ---> Status: " + item[0].getStatus());
-//            }
-//            if (item[1] != null) {
-//                System.out.println("Name: " + item[1].getPath() + " ---> Status: " + item[1].getStatus());
-//            }
         }
     }
 
@@ -63,12 +55,11 @@ public class Comparator implements IComparator {
         }
         return null;
     }
-
-    private HashMap<String, List<File[]>> compareListFiles(String dirMasterA, String dirMasterB, List<File> fileList1, List<File> fileList2) {
+    @Override
+    public HashMap<String, List<File[]>> startCompare(String dirMasterA, String dirMasterB, List<File> fileList1, List<File> fileList2) {
         int sizeList1 = fileList1.size();
         int sizeList2 = fileList2.size();
         HashMap<String, List<File[]>> result = new HashMap<String, List<File[]>>();
-//        FileProp[][] result = new FileProp[(sizeList1 + sizeList2)][2];
         HashMap<String, File> map1;
         if (sizeList1 <= sizeList2) {
             map1 = new HashMap<String, File>();
@@ -106,7 +97,6 @@ public class Comparator implements IComparator {
         List<File[]> newerBList = new ArrayList<File[]>();
         List<File[]> identifyList = new ArrayList<File[]>();
         List<File[]> newestList = new ArrayList<File[]>();
-//        result = new FileProp[listFile.size() + map.size()][2];
         System.out.println("Size1: " + listFile.size() + " Size2: " + map.size());
         for (int i = 0; i < listFile.size(); i++) {
             File listItem = listFile.get(i);
@@ -121,47 +111,20 @@ public class Comparator implements IComparator {
             if (fComp != null) {
                 long mapItemMod = fComp.getAbsoluteFile().lastModified();
                 long listItemMod = listFile.get(i).lastModified();
-//                String statusListItem = "";
-//                String statusMapItem = "";
                 File[] coupleOfFiles = {fComp, listFile.get(i).getAbsoluteFile()};
-                if (mapItemMod > listItemMod) {
-                    
+                if (mapItemMod > listItemMod) {     
                     newerBList.add(coupleOfFiles);
-//                    statusListItem = "older";
-//                    statusMapItem = "newer";
                 } else if (mapItemMod < listItemMod) {
-//                    statusListItem = "newer";
-//                    statusMapItem = "older";
                     newerAList.add(coupleOfFiles);
                 } else {
-//                    statusListItem = "identify";
-//                    statusMapItem = "identify";
                     identifyList.add(coupleOfFiles);
                 }
-//                FileProp file1 = new FileProp();
-//                file1.setName(fName);
-//                file1.setLastModified(listItem.lastModified());
-//                file1.setPath(listItem.getAbsolutePath());
-//                file1.setStatus(statusListItem);
-//                result[i][0] = file1;
-//                FileProp file2 = new FileProp();
-//                file2.setName(fComp.getName());
-//                file2.setLastModified(fComp.lastModified());
-//                file2.setPath(fComp.getAbsolutePath());
-//                file2.setStatus(statusMapItem);
-//                result[i][1] = file2;
             } else {
                 if(listFile.get(i).lastModified()>newestTime){
                     newestTime = listFile.get(i).lastModified();
                     newestDiff = listFile.get(i).getAbsoluteFile();
                 }
                 File[] coupleOfFiles = {null, listFile.get(i).getAbsoluteFile()};
-//                FileProp file1 = new FileProp();
-//                file1.setName(fName);
-//                file1.setLastModified(listItem.lastModified());
-//                file1.setPath(listItem.getAbsolutePath());
-//                file1.setStatus("only");
-//                result[i][0] = file1;
                 onlyBList.add(coupleOfFiles);
             }
         }
@@ -199,12 +162,6 @@ public class Comparator implements IComparator {
         result.put("5", identifyList);
         result.put("6", newestList);
         return result;
-    }
-
-    @Override
-    public FileProp[][] startCompare(File[] listFile1, File[] listFile2) {
-        System.err.println("Not sp yet");
-        return null;
     }
 
     @Override

@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package codec;
+package comparing;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 import service.FileProp;
 
 /**
  *
  * @author Kaka Hoang Huy
  */
-public interface IComparator {
-    FileProp[][] startCompare(File[] listFile1, File[] listFile2);
+interface IComparator {
+    HashMap<String, List<File[]>> startCompare(String dirMasterA, String dirMasterB, List<File> fileList1, List<File> fileList2);
     void stopCompare();
 }

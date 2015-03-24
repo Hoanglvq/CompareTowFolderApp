@@ -11,7 +11,7 @@ package comparing;
  */
 public class CompareInitiator {
 
-    public IComparator init() {
+    public static IComparator init() {
         return new Comparator();
     }
 }
